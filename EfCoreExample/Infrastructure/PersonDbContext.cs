@@ -2,17 +2,13 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace EfCoreExample.Infrastructure
 {
     public class PersonDbContext : DbContext
     {
         public static readonly LoggerFactory MyLoggerFactory
-        = new LoggerFactory(new[] { new ConsoleLoggerProvider((_, __) => true, true) });
+            = new LoggerFactory(new[] { new ConsoleLoggerProvider((_, __) => true, true) });
         public PersonDbContext()
         {
             Database.EnsureCreated();
@@ -22,7 +18,7 @@ namespace EfCoreExample.Infrastructure
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder
                 .UseLoggerFactory(MyLoggerFactory)
-                .UseSqlServer( @"Server=(localdb)\mssqllocaldb;Database=People;Integrated Security=True");
+                .UseSqlServer( @"Server=localhost;Database=People;Integrated Security=True");
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -32,11 +28,11 @@ namespace EfCoreExample.Infrastructure
 
             modelBuilder.Entity<Person>().Property(x => x.FirstName).HasColumnName("FirstName");
             modelBuilder.Entity<Person>().Property(x => x.LastName).HasColumnName("LastName");
-            modelBuilder.Entity<Person>().Property(x => x.Address).HasColumnName("Address")
-                .HasConversion(
-                    address => JsonConvert.SerializeObject(address),
-                    address => JsonConvert.DeserializeObject<Address>(address)
-                );
+
+            modelBuilder.Entity<Person>().Property("City").HasColumnName("City");
+            modelBuilder.Entity<Person>().Property("Street").HasColumnName("Street");
+            modelBuilder.Entity<Person>().Property("ApartamentNumber").HasColumnName("ApartamentNumber");
+            modelBuilder.Entity<Person>().Ignore(x => x.Address);
 
         }
     }

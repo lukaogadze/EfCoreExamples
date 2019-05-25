@@ -9,21 +9,22 @@ namespace EfCoreExample.Domain
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
 
-        public Address Address { get; private set; }
 
-        //private string _city;
-        //private string _street;
-        //private string _apartamentNumber;
-        //public Address Address
-        //{
-        //    get => new Address(this._city, this._street, this._apartamentNumber);
-        //    private set
-        //    {
-        //        this._city = value.City;
-        //        this._street = value.Street;
-        //        this._apartamentNumber = value.ApartamentNumber;
-        //    }
-        //}
+
+        private string City { get;  set; }
+        private string Street { get;  set; }
+        private string ApartamentNumber { get; set; }
+
+        public Address Address
+        {
+            get => new Address(City, Street, ApartamentNumber);
+            private set
+            {
+                City = value.City;
+                Street = value.Street;
+                ApartamentNumber = value.ApartamentNumber;
+            }
+        }
 
 
         private Person() : base(Guid.NewGuid())
