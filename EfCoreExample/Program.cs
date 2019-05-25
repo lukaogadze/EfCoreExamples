@@ -11,8 +11,6 @@ namespace EfCoreExample
         static void Main(string[] args)
         {
             PersonDbContext context = new PersonDbContext();
-
-            var luka = context.People.Where(x => x. == "Batumi").First();
         }
     }
 }
