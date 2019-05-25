@@ -29,9 +29,10 @@ namespace EfCoreExample.Infrastructure
             modelBuilder.Entity<Person>().Property(x => x.FirstName).HasColumnName("FirstName");
             modelBuilder.Entity<Person>().Property(x => x.LastName).HasColumnName("LastName");
 
-            modelBuilder.Entity<Person>().Property("City").HasColumnName("City");
-            modelBuilder.Entity<Person>().Property("Street").HasColumnName("Street");
-            modelBuilder.Entity<Person>().Property("ApartamentNumber").HasColumnName("ApartamentNumber");
+            modelBuilder.Entity<Person>().Property<string>("_city").HasColumnName("City");
+            modelBuilder.Entity<Person>().Property<string>("_street").HasColumnName("Street");
+            modelBuilder.Entity<Person>().Property<string>("_apartamentNumber").HasColumnName("ApartamentNumber");
+
             modelBuilder.Entity<Person>().Ignore(x => x.Address);
 
         }

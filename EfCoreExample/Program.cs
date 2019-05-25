@@ -12,12 +12,12 @@ namespace EfCoreExample
         {
             PersonDbContext context = new PersonDbContext();
             //var address = new Address("Tbilisi", "wulukidze", "123");
-            //var person = new Person("luka", "ogadze", address);            
+            //var person = new Person("luka", "ogadze", address);
 
 
             //context.People.Add(person);
 
-            var luka = context.People.Where(x => EF.Property<string>(x, "City") == "Tbilisi").First();
+            var luka = context.People.Where(x => EF.Property<string>(x, "_city") == "Tbilisi").First();
 
             luka.Update(new Address("Batumi", "12", "000"));
 

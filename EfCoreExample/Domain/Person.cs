@@ -11,18 +11,18 @@ namespace EfCoreExample.Domain
 
 
 
-        private string City { get;  set; }
-        private string Street { get;  set; }
-        private string ApartamentNumber { get; set; }
+        private string _city;
+        private string _street;
+        private string _apartamentNumber;
 
         public Address Address
         {
-            get => new Address(City, Street, ApartamentNumber);
+            get => new Address(_city, _street, _apartamentNumber);
             private set
             {
-                City = value.City;
-                Street = value.Street;
-                ApartamentNumber = value.ApartamentNumber;
+                _city = value.City;
+                _street = value.Street;
+                _apartamentNumber = value.ApartamentNumber;
             }
         }
 
